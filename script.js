@@ -11,12 +11,12 @@ const colors = {
     'coliving': '#e41a1c',
     'flat': '#377eb8',
     'his': '#4daf4a',
+    'hotel': '#c42f44',
     'hostel': '#984ea3',
     'ocupação': '#ff7f00',
     'pousada': '#ffff33',
     'res-misto': '#a65628',
-    'res-multifamiliar': '#f781bf',
-    'hotel': '#c42f44'
+    'res-multifamiliar': '#f781bf'
 };
 
 const dataUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/Lista?key=${GOOGLE_API_KEY}`;
@@ -189,10 +189,11 @@ function updateSummaryTable(filteredData, allData) {
 
         const populationPercentage = typeTotals.totalPopulation ? (filteredTypeTotals.totalPopulation / typeTotals.totalPopulation * 100).toFixed(2) : 0;
         const unitsPercentage = typeTotals.totalUnits ? (filteredTypeTotals.totalUnits / typeTotals.totalUnits * 100).toFixed(2) : 0;
+        const itemCount = filteredData.filter(point => point.TIPO && point.TIPO.toLowerCase().replace(/\s+/g, '-').replace('.', '') === type).length;
 
         return `
             <tr>
-                <td>${typeLabel.charAt(0).toUpperCase() + typeLabel.slice(1)}</td>
+                <td>${typeLabel.charAt(0).toUpperCase() + typeLabel.slice(1)} (${itemCount})</td>
                 <td>${filteredTypeTotals.totalPopulation} (${populationPercentage}%)</td>
                 <td>${filteredTypeTotals.totalUnits} (${unitsPercentage}%)</td>
             </tr>
