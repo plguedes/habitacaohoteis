@@ -2,39 +2,29 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Centro do Recife: Uso residencial + Uso hoteleiro</title>
+    <title>Mapa Interativo com Filtros</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
     <style>
         body { margin: 0; padding: 0; font-family: 'Montserrat', sans-serif; background-color: #f8f9fa; }
         #map { position: absolute; top: 70px; bottom: 0; width: 100%; }
-        .title { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 2; background: rgba(34, 34, 34, 0.9); padding: 10px 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); font-size: 18px; font-weight: bold; color: #fff; }
-        .controls { position: absolute; top: 70px; left: 10px; z-index: 1; background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); width: 250px; }
-        .summary { position: absolute; top: 70px; right: 10px; z-index: 1; background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); width: 300px; font-size: 12px; }
-        .legend { position: absolute; bottom: 10px; left: 10px; z-index: 1; background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); font-size: 12px; }
+        .title { position: absolute; top: 10px; left: 50%; transform: translateX(-50%); z-index: 2; background: rgba(34, 34, 34, 0.9); padding: 10px 20px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); font-family: 'Montserrat', sans-serif; font-size: 18px; font-weight: bold; color: #fff; }
+        .controls { position: absolute; top: 70px; left: 10px; z-index: 1; background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); width: 250px; font-family: 'Montserrat', sans-serif; }
+        .summary { position: absolute; top: 70px; right: 10px; z-index: 1; background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); font-family: 'Montserrat', sans-serif; width: 300px; font-size: 12px; }
+        .legend { position: absolute; bottom: 10px; left: 10px; z-index: 1; background: rgba(255, 255, 255, 0.9); padding: 15px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); font-family: 'Montserrat', sans-serif; font-size: 12px; }
         .controls label, .controls select { margin-bottom: 10px; width: 100%; padding: 8px; font-size: 14px; }
         .controls select, .controls input { border: 1px solid #ccc; border-radius: 4px; }
-        .popup-content { font-size: 12px; line-height: 1.5; background: rgba(255, 255, 255, 0.9); padding: 10px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
+        .popup-content { font-family: 'Montserrat', sans-serif; font-size: 12px; line-height: 1.5; background: rgba(255, 255, 255, 0.9); padding: 10px; border-radius: 8px; box-shadow: 0 2px 6px rgba(0,0,0,0.3); }
         .popup-content h3 { margin: 0; font-size: 14px; color: #333; }
         .popup-content p { margin: 5px 0; }
         .marker { background-size: cover; width: 30px; height: 30px; cursor: pointer; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); border-radius: 50%; }
+        .marker-label { font-size: 12px; text-align: center; color: white; text-shadow: 0px 0px 5px black; position: absolute; bottom: -20px; left: 50%; transform: translateX(-50%); white-space: nowrap; }
         .summary-table { width: 100%; border-collapse: collapse; }
         .summary-table th, .summary-table td { padding: 4px; text-align: left; border-bottom: 1px solid #ddd; }
         .summary-table th { background-color: #f2f2f2; }
         .legend-item { display: flex; align-items: center; margin-bottom: 5px; }
         .legend-color { width: 12px; height: 12px; border-radius: 50%; margin-right: 5px; }
-        :root {
-            --coliving: #e41a1c;
-            --flat: #377eb8;
-            --his: #4daf4a;
-            --hotel: #c42f44;
-            --hostel: #984ea3;
-            --ocupação: #ff7f00;
-            --pousada: #ffff33;
-            --res-misto: #a65628;
-            --res-multifamiliar: #f781bf
-        }
     </style>
 </head>
 <body>
@@ -51,8 +41,8 @@
             <option value="hostel">Hostel</option>
             <option value="ocupação">Ocupação</option>
             <option value="pousada">Pousada</option>
-            <option value="res-misto">Res. Misto</option>
-            <option value="res-multifamiliar">Res. Multifamiliar</option>
+            <option value="res-misto">Residencial Misto</option>
+            <option value="res-multifamiliar">Residencial Multifamiliar</option>
         </select>
         <label for="bairroFilter">Filtrar por Bairro</label>
         <select id="bairroFilter">
@@ -92,8 +82,9 @@
         <div class="legend-item"><div class="legend-color" style="background-color: #ff7f00;"></div>Ocupação</div>
         <div class="legend-item"><div class="legend-color" style="background-color: #ffff33;"></div>Pousada</div>
         <div class="legend-item"><div class="legend-color" style="background-color: #a65628;"></div>Res. Misto</div>
-        <div class="legend-item"><div class="legend-color" style="background-color: #f781bf;"></div>Res. Multifamiliar</div>    
+        <div class="legend-item"><div class="legend-color" style="background-color: #f781bf;"></div>Res. Multifamiliar</div>
     </div>
+    <script src="config.js"></script>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
     <script src="script.js"></script>
 </body>
