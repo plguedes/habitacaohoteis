@@ -1,4 +1,4 @@
-mapboxgl.accessToken = 'pk.eyJ1IjoicGxndWVkZXMiLCJhIjoiZEg0TXRZOCJ9.J1TTOXpWW3ERgXWcG2uTdQ';
+mapboxgl.accessToken = MAPBOX_ACCESS_TOKEN;
 
 const map = new mapboxgl.Map({
     container: 'map',
@@ -11,16 +11,15 @@ const colors = {
     'coliving': '#e41a1c',
     'flat': '#377eb8',
     'his': '#4daf4a',
-    'hotel': '#c42f44'
     'hostel': '#984ea3',
     'ocupação': '#ff7f00',
     'pousada': '#ffff33',
     'res-misto': '#a65628',
     'res-multifamiliar': '#f781bf',
-    
+    'hotel': '#c42f44'
 };
 
-const dataUrl = `https://sheets.googleapis.com/v4/spreadsheets/1pNHyLO6PCJKm9arr_unwoYufGhpuWyKC80uKoJPsv0E/values/Lista?key=AIzaSyBnzMrMQvlRhamu5wkKjweI2Iq1oIJZCog`;
+const dataUrl = `https://sheets.googleapis.com/v4/spreadsheets/${SHEETS_ID}/values/Lista?key=${GOOGLE_API_KEY}`;
 
 async function loadGoogleSheetsData(url) {
     try {
@@ -153,7 +152,7 @@ async function createPopupContent(properties) {
 }
 
 function getStreetViewImage(lat, lng) {
-    const streetViewUrl = `https://maps.googleapis.com/maps/api/streetview?size=200x200&location=${lat},${lng}&fov=120&source=outdoor&pitch=10&key=AIzaSyDHtM7TQFC5tvvPTOLUrjesABt_G2pJ75k`;
+    const streetViewUrl = `https://maps.googleapis.com/maps/api/streetview?size=200x200&location=${lat},${lng}&fov=120&source=outdoor&pitch=10&key=${GOOGLE_API_KEY}`;
     return streetViewUrl;
 }
 
