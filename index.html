@@ -2,7 +2,7 @@
 <html>
 <head>
     <meta charset="utf-8" />
-    <title>Mapa Interativo com Filtros</title>
+    <title>Centro do Recife: Uso residencial + Uso hoteleiro</title>
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <link href="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.css" rel="stylesheet" />
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;700&display=swap" rel="stylesheet">
@@ -28,12 +28,12 @@
             --coliving: #e41a1c;
             --flat: #377eb8;
             --his: #4daf4a;
+            --hotel: #c42f44;
             --hostel: #984ea3;
             --ocupação: #ff7f00;
             --pousada: #ffff33;
             --res-misto: #a65628;
-            --res-multifamiliar: #f781bf;
-            --hotel: #c42f44;
+            --res-multifamiliar: #f781bf
         }
     </style>
 </head>
@@ -47,12 +47,12 @@
             <option value="coliving">Coliving</option>
             <option value="flat">Flat</option>
             <option value="his">HIS</option>
+            <option value="hotel">Hotel</option>
             <option value="hostel">Hostel</option>
             <option value="ocupação">Ocupação</option>
             <option value="pousada">Pousada</option>
             <option value="res-misto">Res. Misto</option>
             <option value="res-multifamiliar">Res. Multifamiliar</option>
-            <option value="hotel">Hotel</option>
         </select>
         <label for="bairroFilter">Filtrar por Bairro</label>
         <select id="bairroFilter">
@@ -87,12 +87,12 @@
         <div class="legend-item"><div class="legend-color" style="background-color: #e41a1c;"></div>Coliving</div>
         <div class="legend-item"><div class="legend-color" style="background-color: #377eb8;"></div>Flat</div>
         <div class="legend-item"><div class="legend-color" style="background-color: #4daf4a;"></div>HIS</div>
+        <div class="legend-item"><div class="legend-color" style="background-color: #c42f44;"></div>Hotel</div>
         <div class="legend-item"><div class="legend-color" style="background-color: #984ea3;"></div>Hostel</div>
         <div class="legend-item"><div class="legend-color" style="background-color: #ff7f00;"></div>Ocupação</div>
         <div class="legend-item"><div class="legend-color" style="background-color: #ffff33;"></div>Pousada</div>
         <div class="legend-item"><div class="legend-color" style="background-color: #a65628;"></div>Res. Misto</div>
-        <div class="legend-item"><div class="legend-color" style="background-color: #f781bf;"></div>Res. Multifamiliar</div>
-        <div class="legend-item"><div class="legend-color" style="background-color: #c42f44;"></div>Hotel</div>
+        <div class="legend-item"><div class="legend-color" style="background-color: #f781bf;"></div>Res. Multifamiliar</div>    
     </div>
     <script src="https://api.mapbox.com/mapbox-gl-js/v2.9.1/mapbox-gl.js"></script>
     <script src="script.js"></script>
