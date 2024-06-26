@@ -11,12 +11,13 @@ const colors = {
     'coliving': '#e41a1c',
     'flat': '#377eb8',
     'his': '#4daf4a',
+    'hotel': '#c42f44'
     'hostel': '#984ea3',
     'ocupação': '#ff7f00',
     'pousada': '#ffff33',
     'res-misto': '#a65628',
     'res-multifamiliar': '#f781bf',
-    'hotel': '#c42f44'
+    
 };
 
 const dataUrl = `https://sheets.googleapis.com/v4/spreadsheets/1pNHyLO6PCJKm9arr_unwoYufGhpuWyKC80uKoJPsv0E/values/Lista?key=AIzaSyBnzMrMQvlRhamu5wkKjweI2Iq1oIJZCog`;
